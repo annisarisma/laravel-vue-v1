@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSkillRequest;
 use App\Http\Resources\V1\SkillCollection;
+use App\Http\Resources\V1\SkillResource;
 use App\Models\Skill;
 use Illuminate\Http\Request;
 
@@ -39,9 +40,9 @@ class SkillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Skill $skill)
     {
-        //
+        return new SkillResource($skill);
     }
 
     /**
@@ -55,16 +56,18 @@ class SkillController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreSkillRequest $request, Skill $skill)
     {
-        //
+        $skill->update($request->validated());
+        return response()->json('Skill Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Skill $skill)
     {
-        //
+        $skill->delete();
+        return response()->json('Skill Deleted');
     }
 }
