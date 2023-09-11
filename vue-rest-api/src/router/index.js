@@ -9,6 +9,22 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+    {
+      path: '/skills',
+      name: 'SkillIndex',
+      component: () => import('../views/skills/SkillIndex.vue')
+    },
+    {
+      path: '/skills/create',
+      name: 'SkillCreate',
+      component: () => import('../views/skills/SkillCreate.vue')
+    },
+    {
+      path: '/skills/:id/edit',
+      name: 'SkillEdit',
+      component: () => import('../views/skills/SkillEdit.vue'),
+      props: true,
+    },
   ]
 })
 
